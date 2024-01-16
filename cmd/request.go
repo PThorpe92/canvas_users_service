@@ -1,8 +1,10 @@
 package cmd
 
 import (
+	"bytes"
 	json "encoding/json"
 	"io"
+	"log"
 	"net/http"
 )
 
@@ -105,16 +107,21 @@ func (r *RequestHandler) SearchUnlockedUsers(name string) []UnlockEdUser {
 	return users
 }
 
-func (r *RequestHandler) AddUserUnlocked(user CanvasUser) {
-	url := r.Request.URL.JoinPath(r.Request.URL.String(), CANVAS_USERS)
-	r.Request.URL = url
-	r.Request.Method = POST
-
+func (r *RequestHandler) AddUserUnlocked(user PostUnlockedUser) error {
 	body, err := json.Marshal(user)
 	if err != nil {
-		return
+		return err
 	}
-	r.Request.Body = body
-	r.Request.Method = POST
-	r.Send()
+	url := r.Request.URL.JoinPath(r.Request.URL.String(), CANVAS_USERS)
+	req, err := http.NewRequest(POST, url.String(), bytes.NewBuffer(body))
+	if err != nil {
+		return err
+	}
+	r.Request = req
+	resp, err := r.Send()
+	if err != nil {
+		return err
+	}
+	log.Printf("%s", resp)
+	return nil
 }

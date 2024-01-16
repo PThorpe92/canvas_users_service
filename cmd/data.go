@@ -36,6 +36,15 @@ type UnlockEdUser struct {
 	PasswordReset   int    `json:"password_reset"`
 }
 
+type PostUnlockedUser struct {
+	NameFirst     string `json:"name_first"`
+	NameLast      string `json:"name_last"`
+	Email         string `json:"email"`
+	Role          string `json:"role"`
+	Username      string `json:"username"`
+	PasswordReset int    `json:"password_reset"`
+}
+
 type UserMapping struct {
 	Id         int
 	ExternId   int
