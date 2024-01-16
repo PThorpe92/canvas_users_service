@@ -1,6 +1,9 @@
 package cmd
 
-import "sort"
+import (
+	"sort"
+	"strings"
+)
 
 type MatchScore struct {
 	CanvasUser CanvasUser
@@ -8,29 +11,32 @@ type MatchScore struct {
 }
 
 func calculateMatchScore(canvasUser CanvasUser, unlockEdUser UnlockEdUser) float64 {
-	// Define weights for each field
+	name_first := strings.TrimSpace(strings.Split(canvasUser.SortableName, ",")[1])
+	name_last := strings.TrimSpace(strings.Split(canvasUser.SortableName, ",")[0])
+	var total float64
 	const (
-		nameWeight         = 0.3
-		sortableNameWeight = 0.2
-		shortNameWeight    = 0.2
-		// ... other weights
+		nameWeight    = 0.5 // last + first both must match
+		loginIdWeight = 0.3 // this field is generally the email, so a match on a split("@")[0] -> username is a good sign
 	)
+	if strings.Contains(canvasUser.LoginId, "@") {
+		username := strings.Split(canvasUser.LoginId, "@")[0]
+		if username == unlockEdUser.Username {
+			total += loginIdWeight
+		}
+	}
+	if unlockEdUser.NameFirst == name_first && unlockEdUser.NameLast == name_last {
+		total += nameWeight
+	}
+	// nameSimilarity := similarity(canvasUser.Name, unlockEdUser.NameFirst+unlockEdUser.NameLast)
+	// sortableNameSimilarity := similarity(canvasUser.SortableName, unlockEdUser.NameFirst+unlockEdUser.NameLast)
+	// shortNameSimilarity := similarity(canvasUser.ShortName, unlockEdUser.NameFirst+unlockEdUser.NameLast)
 
-	// Calculate similarity for each field (you can use a custom similarity function)
-	nameSimilarity := similarity(canvasUser.Name, unlockEdUser.NameFirst+unlockEdUser.NameLast)
-	sortableNameSimilarity := similarity(canvasUser.SortableName, unlockEdUser.NameFirst+unlockEdUser.NameLast)
-	shortNameSimilarity := similarity(canvasUser.ShortName, unlockEdUser.NameFirst+unlockEdUser.NameLast)
-	// ... other similarities
-
-	// Calculate total score
-	score := nameSimilarity*nameWeight + sortableNameSimilarity*sortableNameWeight + shortNameSimilarity*shortNameWeight // ... add other scores
-
-	return score
+	return total
 }
 
-// Implement a similarity function (e.g., Levenshtein distance, Jaccard index, etc.)
 func similarity(a, b string) float64 {
-	// Dummy implementation, replace with actual algorithm
+	// TODO: implement similarity/matching algo
+
 	if a == b {
 		return 1
 	}
@@ -44,6 +50,7 @@ func (db *DbHandler) FindBestMatches(unlockEdUser UnlockEdUser) []MatchScore {
 		score := calculateMatchScore(user, unlockEdUser)
 		matches = append(matches, MatchScore{CanvasUser: user, Score: score})
 	}
+
 	// Sort matches by score, highest first
 	sort.Slice(matches, func(i, j int) bool {
 		return matches[i].Score > matches[j].Score
