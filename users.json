@@ -1,0 +1,90 @@
+[
+  {
+    "id": 7,
+    "name": "Markus Faker",
+    "created_at": "2024-01-14T16:31:53-07:00",
+    "sortable_name": "Faker, Markus",
+    "short_name": "Markus Faker",
+    "sis_user_id": null,
+    "integration_id": null,
+    "sis_import_id": null,
+    "login_id": "Markus@faker.com"
+  },
+  {
+    "id": 8,
+    "name": "Norman Gildorf",
+    "created_at": "2024-01-14T16:32:21-07:00",
+    "sortable_name": "Gildorf, Norman",
+    "short_name": "Norman Gildorf",
+    "sis_user_id": null,
+    "integration_id": null,
+    "sis_import_id": null,
+    "login_id": "Gildorf36@email.com"
+  },
+  {
+    "id": 6,
+    "name": "Some OtherUser",
+    "created_at": "2024-01-14T16:31:34-07:00",
+    "sortable_name": "OtherUser, Some",
+    "short_name": "Some OtherUser",
+    "sis_user_id": null,
+    "integration_id": null,
+    "sis_import_id": null,
+    "login_id": "SomeOther@user.com"
+  },
+  {
+    "id": 1,
+    "name": "preston@unlockedlabs.org",
+    "created_at": "2024-01-11T19:05:56-07:00",
+    "sortable_name": "preston@unlockedlabs.org",
+    "short_name": "preston@unlockedlabs.org",
+    "sis_user_id": null,
+    "integration_id": null,
+    "sis_import_id": null,
+    "login_id": "preston@unlockedlabs.org"
+  },
+  {
+    "id": 4,
+    "name": "John Schmidt",
+    "created_at": "2024-01-14T16:30:59-07:00",
+    "sortable_name": "Schmidt, John",
+    "short_name": "John Schmidt",
+    "sis_user_id": null,
+    "integration_id": null,
+    "sis_import_id": null,
+    "login_id": "John@something.com"
+  },
+  {
+    "id": 3,
+    "name": "Joe Schmoe",
+    "created_at": "2024-01-14T16:30:36-07:00",
+    "sortable_name": "Schmoe, Joe",
+    "short_name": "Joe Schmoe",
+    "sis_user_id": "66",
+    "integration_id": null,
+    "sis_import_id": null,
+    "login_id": "joe@schmoe.com"
+  },
+  {
+    "id": 2,
+    "name": "Preston Thorpe",
+    "created_at": "2024-01-11T19:20:20-07:00",
+    "sortable_name": "Thorpe, Preston",
+    "short_name": "Preston Thorpe",
+    "sis_user_id": "preston.thorpe@maine.edu",
+    "integration_id": null,
+    "sis_import_id": null,
+    "login_id": "preston.thorpe@maine.edu"
+  },
+  {
+    "id": 5,
+    "name": "Fake User",
+    "created_at": "2024-01-14T16:31:14-07:00",
+    "sortable_name": "User, Fake",
+    "short_name": "Fake User",
+    "sis_user_id": null,
+    "integration_id": null,
+    "sis_import_id": null,
+    "login_id": "fake@user.com"
+  }
+]
